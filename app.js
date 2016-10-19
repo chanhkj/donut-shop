@@ -6,11 +6,16 @@ var bodyParser = require('body-parser')
 var mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
-if (process.env.NODE_ENV === 'production') {
-  mongoose.connect('mongodb://chanhkj:John2010@ds061506.mlab.com:61506/donut-shop')
-} else {
-  mongoose.connect('mongodb://localhost/donut-shop')
-}
+// load environment variables from .env file, where API keys and passwords are configured.
+
+dotenv.load({ path: '.env.' + process.env.NODE_ENV })
+mongoose.connect(process.env.MONGO_URI)
+// below is replaced with dotenv
+// if (process.env.NODE_ENV === 'production') {
+//   mongoose.connect('mongodb://chanhkj:John2010@ds061506.mlab.com:61506/donut-shop')
+// } else {
+//   mongoose.connect('mongodb://localhost/donut-shop')
+// }
 
 app.set('view engine', 'ejs')
 app.use(layout)
