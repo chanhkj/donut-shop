@@ -6,7 +6,7 @@ var bodyParser = require('body-parser')
 var mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
-if (process.env.NODE_ENV === 'productions') {
+if (process.env.NODE_ENV === 'production') {
   mongoose.connect('mongodb://chanhkj:John2010@ds061506.mlab.com:61506/donut-shop')
 } else {
   mongoose.connect('mongodb://localhost/donut-shop')
