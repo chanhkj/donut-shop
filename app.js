@@ -2,6 +2,7 @@ var express = require('express')
 var app = express()
 var layout = require('express-ejs-layouts')
 var bodyParser = require('body-parser')
+var dotenv = require('dotenv')
 
 var mongoose = require('mongoose')
 mongoose.Promise = global.Promise
