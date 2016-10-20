@@ -3,15 +3,26 @@ var router = express.Router()
 
 var User = require('../models/user')
 
-router.get('/', function (req, res) {
-  User.find({}, function (err, allUsers) {
+router.get('/', function(req, res) {
+  User.find({}, function(err, allUsers) {
     res.json(allUsers)
   })
 })
 
-router.post('/', function (req, res) {
-  User.create(req.body.user, function (err, newUser) {
-    res.json(newUser)
+router.get('/:id', function(req, res) {
+  // res.send('requested id is ' + req.params.id)
+  User.findone({
+    '_id': req.params.id
+  }, function(err, user) {
+    res.json(user)
+  })
+})
+
+router.post('/', function(req, res) {
+  // res.json(req.body)
+  User.create(req.body.user, function(err, savedUser) {
+    console.log('new user created')
+    res.json(savedUser)
   })
 })
 

@@ -1,0 +1,21 @@
+<h1>Login Here</h1>
+
+
+<% if(message.length > 0) { %>
+  <h2>FLASH FOUND</h2>
+  <div class="alert alert-danger">
+    <%= message %>
+  </div>
+<% } %>
+
+<form class="login-user" action="/login" method="post">
+  <div class="row">
+    <div class="six columns">
+      <input type="text" name="user[local][email]" id="user-email" placeholder="Your user email" class="u-full-width">
+    </div>
+    <div class="six columns">
+      <input type="text" name="user[local][password]" id="user-password" placeholder="Your user password" class="u-full-width">
+    </div>
+    <input type="submit" value='Log in here'>
+  </div>
+</form>

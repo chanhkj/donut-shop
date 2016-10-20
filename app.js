@@ -2,6 +2,13 @@ var express = require('express')
 var app = express()
 var layout = require('express-ejs-layouts')
 var bodyParser = require('body-parser')
+
+// var bcrypt = require('bcrypt')
+var session = require('express-session')
+var flash = require('connect-flash')
+
+var passport = require('passport')
+
 var dotenv = require('dotenv')
 
 var mongoose = require('mongoose')
@@ -20,6 +27,16 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.set('view engine', 'ejs')
 app.use(layout)
+app.use(session({
+  secret: process.env.EXPRESS_SECRET,
+  resave: true,
+  saveUninitialized: true
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use(flash())
 
 // serve static files
 app.use(express.static(__dirname + '/public'))
@@ -38,7 +55,7 @@ app.use(bodyParser.urlencoded({
 app.use('/donuts', frontendRoutes) // only render ejs files
 app.use('/api/donuts', ajaxRoutes) // only handle ajax request
 
-app.use('/users', usersRoutes)
+app.use('/', usersRoutes)
 app.use('/api/users', usersAPIRoutes)
 
 app.listen(process.env.PORT || 3000)
